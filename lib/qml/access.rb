@@ -46,7 +46,7 @@ module QML
             meta_class.add_property(prop, :"#{prop}_changed")
           end
 
-          methods = ancestors.take_while { |k| k.include?(Access) }
+          methods = ancestors #.take_while { |k| k.include?(Access) }
             .map { |k| k.instance_methods(false) }.inject(&:|)
             .grep(ALLOWED_PATTERN)
           ignored_methods = signals | properties.flat_map { |p| [p, :"#{p}=", :"#{p}_changed"] }
